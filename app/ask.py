@@ -15,8 +15,12 @@ import argparse
 
 from google import genai
 from google.genai import errors, types
+from rich.console import Console
+from rich.markdown import Markdown
 
 from app.config import MODEL, api_error_message, get_api_key
+
+console = Console()
 
 # 講座に固有の質問。正しい答えは data/glossary.json の homework-levels にある
 DEFAULT_QUESTION = "AIE2026の講座の宿題にある「3レベル」とは何ですか？"
@@ -59,7 +63,7 @@ def main() -> None:
                 break
             if question:
                 print(f"[質問] {question}\n")
-                print(ask(question, history))
+                console.print(Markdown(ask(question, history) or "（回答テキストなし）"))
             question = input("\n[次の質問] ")
     except (EOFError, KeyboardInterrupt):
         print("\n対話を終了します。")

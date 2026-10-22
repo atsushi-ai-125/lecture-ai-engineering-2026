@@ -19,8 +19,12 @@ from typing import Literal
 from google import genai
 from google.genai import errors, types
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
+from rich.console import Console
+from rich.markdown import Markdown
 
 from app.config import get_api_key
+
+console = Console()
 
 DEFAULT_CONFIG = Path(__file__).with_name("benchmark.json")
 TOKEN_FIELDS = {
@@ -157,7 +161,7 @@ def measure(client, model, question, config, experiment, index, repeat) -> Resul
 def print_result(result: Result) -> None:
     print(f"\n[{result.request_index}] {result.model} / {result.question_id} / {result.status}")
     print(f"質問: {result.question}")
-    print(result.answer or "（回答テキストなし）")
+    console.print(Markdown(result.answer or "（回答テキストなし）"))
     tokens = " / ".join(
         f"{name}={getattr(result, name) if getattr(result, name) is not None else '未取得'}"
         for name in TOKEN_FIELDS
