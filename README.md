@@ -32,6 +32,13 @@ uv run python -m app.ask "LoRAとは何ですか？"
 
 詳しい手順は [lectures/01/problem.md](lectures/01/problem.md) を見てください。
 
+第1回の発展課題は [モデル別の応答時間・トークン数比較](lectures/01/benchmark.md) を参照してください。
+`uv run python -m app.benchmark` でAPIを呼ばずに実験計画を確認できます。
+複数モデルの実測は `uv run python -m app.benchmark --run` で開始し、表示される計画と料金リスクを確認します。
+ターミナルで質問を入力して比較する場合は `uv run python -m app.benchmark --interactive --run` を使います。
+質問を1行ずつ入力し、空行で入力を終え、実行計画を確認して `yes` と入力してください。
+`app.ask` は単一モデルとの会話用です。比較する質問は `app/benchmark.json` に設定することもできます。
+
 ## 構成
 
 ```

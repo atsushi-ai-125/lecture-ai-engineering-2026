@@ -1,0 +1,25 @@
+{
+  "models": ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite"],
+  "questions": [
+    {
+      "id": "fact",
+      "category": "事実確認",
+      "text": "日本の首都はどこですか。都市名だけ答えてください。"
+    },
+    {
+      "id": "explanation",
+      "category": "説明",
+      "text": "機械学習の過学習とは何ですか。原因と対策を含め、初心者向けに日本語200字以内で説明してください。"
+    },
+    {
+      "id": "reasoning",
+      "category": "推論",
+      "text": "赤い玉3個と青い玉2個が入った袋から、戻さずに2個取り出します。2個とも赤い確率はいくつですか。計算式と短い説明を日本語200字以内で答えてください。"
+    }
+  ],
+  "repeat": 1,
+  "interval_seconds": 15,
+  "max_output_tokens": 1024,
+  "temperature": 1.0,
+  "thinking_level": null
+}
