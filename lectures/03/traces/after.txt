@@ -1,0 +1,27 @@
+[model] gemini-3.5-flash-lite
+LoRAとQLoRAの違いについて、以下の表にまとめました。
+
+| 観点 | LoRA | QLoRA |
+| :--- | :--- | :--- |
+| **ベースモデルの扱い** | そのままの精度（通常は16ビット等）で保持する | 4ビットなどに量子化してメモリを大幅に節約する |
+| **学習方法** | 更新分を低ランク行列で表し、その小さな行列だけを学習する | ベースモデルを量子化した状態で、LoRAと同様に低ランク行列だけを学習する |
+| **必要なGPUメモリ** | QLoRAに比べると多く必要になる | 4ビット量子化によりメモリを大きく削減し、より大きなモデルを小さなGPUで扱える |
+| **出力と注意点** | 量子化による誤差がない | 量子化の誤差によって出力が変わることがある |
+
+学習するパラメータやアダプタの考え方は共通していますが、ベースモデルをそのまま使うか、量子化してメモリを削るかが大きな違いです。
+
+（第2回）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'LoRA'})
+[tool call]   search_glossary({'query': 'QLoRA'})
+[tool return] search_glossary -> [{"term": "LoRA", "lecture": 2, "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラ…
+[tool return] search_glossary -> [{"term": "QLoRA", "lecture": 2, "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2…
+[tool call]   get_lecture_summary({'lecture': 2})
+[tool return] get_lecture_summary -> # 第2回 ファインチューニングとLoRA
+
+## この回のねらい
+
+- 事前学習とファインチューニングの違い、ファインチューニングが向く場面と向かない場面を理解する
+- LoRAの考え方を理解し、Google Colab上で小さなモデルを…
+[usage] RunUsage(cost=Decimal('0.0016545'), details={'text_prompt_tokens': 3165}, input_text_tokens=3165, input_tokens=3165, output_tokens=282, requests=3, tool_calls=3)
