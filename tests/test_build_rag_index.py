@@ -35,6 +35,7 @@ def test_built_index_can_be_searched(materials, monkeypatch):
     assert result["pages"] == 2  # 第5回の資料は検索対象に含めない
     assert all("章" in text and "ページ" in text for text in texts)
     monkeypatch.setattr(retrieval, "RAG_DB", database)
+    monkeypatch.setattr(retrieval, "RAG_TOP_K", 2)
     monkeypatch.setattr(retrieval, "embed_text", lambda *_: [1, 0])
     hits = retrieval.search("質問")
     assert [h["page_id"] for h in hits] == ["lec01-main-p001", "lec02-main-p001"]
